@@ -1,42 +1,32 @@
 <?php
 
-namespace Database\Seeders;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
-class ProdukSeeder extends Seeder
+return new class extends Migration
 {
-    public function run(): void
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
     {
-        DB::table('produks')->insert([
-            [
-                'namaproduk'   => 'Pulpen Hitam',
-                'harga_jual'   => 3500,
-                'harga_beli'   => 2000,
-                'kategori'     => 'Alat Tulis',
-                'stok'         => 150,
-                'created_at'   => now(),
-                'updated_at'   => now(),
-            ],
-            [
-                'namaproduk'   => 'Penghapus Kecil',
-                'harga_jual'   => 1000,
-                'harga_beli'   => 500,
-                'kategori'     => 'Alat Tulis',
-                'stok'         => 300,
-                'created_at'   => now(),
-                'updated_at'   => now(),
-            ],
-            [
-                'namaproduk'   => 'Buku Gambar A4',
-                'harga_jual'   => 7000,
-                'harga_beli'   => 5000,
-                'kategori'     => 'Kertas',
-                'stok'         => 80,
-                'created_at'   => now(),
-                'updated_at'   => now(),
-            ],
-        ]);
+        Schema::create('produks', function (Blueprint $table) {
+            $table->id();
+            $table->string('namaproduk'); 
+            $table->integer('harga_jual');
+            $table->integer('harga_beli');
+            $table->string('kategori')->nullable(); 
+            $table->integer('stok');
+            $table->timestamps();
+        });
     }
-}
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('produks');
+    }
+};
